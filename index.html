@@ -122,7 +122,7 @@ btn.onclick = checkPassword;
 input.addEventListener("keydown", e => {if(e.key==="Enter") checkPassword();});
 
 function checkPassword(){
-  if(input.value.trim() === "123"){
+  if(input.value.trim() === "XAMAKEYAUTH"){
     result.style.color="#38bdf8";
     result.textContent="Password Correct! Unlocking...";
     setTimeout(()=>{
@@ -226,4 +226,5 @@ function openAI() {
 </script>
 </body>
 </html>
+
 
