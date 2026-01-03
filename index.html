@@ -10,15 +10,19 @@
 
 <body>
 
-<div id="loadingScreen"><div class="loader"></div></div>
+<div id="loadingScreen">
+  <div class="loader"></div>
+</div>
 
 <div class="lock-screen" id="lockScreen">
   <div class="lock-box">
     <div class="lock-title">Enter Password</div>
+
     <div class="input-container">
       <input id="passwordInput" type="password" placeholder="Enter code...">
       <button id="passwordBtn">🔒</button>
     </div>
+
     <div id="passwordResult"></div>
     <div id="passwordTips" class="tips"></div>
   </div>
@@ -34,9 +38,11 @@
     <div class="nav" onclick="openAI()">🤖 AI</div>
     <div class="nav" onclick="about()">❓ About</div>
   </div>
+
   <div class="main" id="main"></div>
 </div>
 
 <script src="script.js"></script>
 </body>
 </html>
+
