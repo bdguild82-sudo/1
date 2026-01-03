@@ -3,19 +3,24 @@
 <head>
 <meta charset="UTF-8">
 
-<!-- PERMANENT TAB TITLE -->
-<title>Grades</title>
+<title>XAMAS PROXY V2.014</title>
 
-<!-- PERMANENT TAB ICON -->
 <link id="tabIcon" rel="icon" type="image/png"
       href="https://companieslogo.com/img/orig/PWSC-358b9060.png?t=1720244493">
+
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
+
 body{
-  font-family:Arial,Helvetica,sans-serif;height:100vh;overflow:hidden;color:white;
-  background: linear-gradient(135deg, #00008B, #818cf8, #00008B);
-  background-size: 200% 200%; /* Wavy blue gradient */
-  animation: gradientMove 6s ease infinite;
+  font-family:Arial,Helvetica,sans-serif;
+  height:100vh;
+  overflow:hidden;
+  color:white;
+
+  /* NEW DARK BLUE GRADIENT */
+  background: linear-gradient(135deg, #000814, #001d3d, #003566, #001d3d, #000814);
+  background-size: 300% 300%;
+  animation: gradientMove 12s ease infinite;
 }
 
 @keyframes gradientMove {
@@ -24,208 +29,243 @@ body{
   100% { background-position: 0% 50%; }
 }
 
-.lock-screen{position:fixed;top:0;left:0;width:100vw;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;background:rgba(2,6,23,.6);z-index:9999}
-.lock-box{max-width:700px;width:90vw;padding:40px;border-radius:16px;background:rgba(2,6,23,.85);border:1px solid rgba(255,255,255,0.2);box-shadow:0 0 30px rgba(56,189,248,.4);text-align:center;font-size:18px;line-height:1.5}
-.lock-title{font-size:36px;font-weight:900;margin-bottom:20px;background:linear-gradient(270deg,#38bdf8,#818cf8,#22d3ee,#f472b6,#38bdf8);background-size:1000% 1000%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:gradientMove 6s ease infinite}
-.input-container{display:flex;justify-content:center;margin-bottom:15px}
-input{flex:1;padding:12px 15px;border-radius:10px 0 0 10px;border:none;outline:none;font-size:18px;color:white;background:rgba(0,0,0,0.3)}
-button{padding:12px 15px;border-radius:0 10px 10px 0;border:none;cursor:pointer;background:#38bdf8;color:#fff;font-size:20px}
-#passwordResult{margin-top:10px;font-size:18px;text-align:center;color:red}
-.header{position:fixed;top:0;left:0;width:100%;height:60px;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:900;letter-spacing:2px;background:rgba(2,6,23,0.85);background-image:linear-gradient(270deg,#38bdf8,#818cf8,#22d3ee,#f472b6,#38bdf8);background-size:1000% 1000%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:gradientMove 6s ease infinite;border-bottom:1px solid rgba(255,255,255,0.15);z-index:1000}
-.container{display:flex;height:calc(100vh - 60px);margin-top:60px}
-.sidebar{width:400px;padding:20px;background:linear-gradient(180deg,rgba(15,23,42,.95),rgba(2,6,23,.95));border-right:1px solid rgba(255,255,255,.15)}
-.sidebar h3{margin:0 0 15px 0;opacity:.85;font-size:18px}
-.nav{padding:12px;margin-bottom:12px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:linear-gradient(135deg,rgba(56,189,248,.15),rgba(129,140,248,.15));cursor:pointer;transition:.3s;font-size:16px}
-.nav:hover{transform:translateX(6px) scale(1.05);background:linear-gradient(135deg,rgba(56,189,248,.35),rgba(129,140,248,.35));box-shadow:0 0 15px rgba(56,189,248,.6)}
-.main{flex:1;position:relative;display:flex;align-items:center;justify-content:center;transition:.4s;overflow:hidden;opacity:0;transition:opacity 0.5s ease-in-out;}
-.main.visible { opacity: 1;}
-.about-box{max-width:1200px;padding:60px;border-radius:16px;background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5));background-size:cover;background-position:center;border:1px solid rgba(255,255,255,.2);box-shadow:0 0 30px rgba(56,189,248,.4);text-align:center;font-size:20px;line-height:1.5}
-.about-title{font-size:28px;font-weight:900;margin-bottom:15px;background:linear-gradient(90deg,#38bdf8,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-
-.game-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 15px;
-  padding: 20px;
-  margin-top: 20px;
-  width: 90%;
-  max-width: 1000px;
+/* LOADING SCREEN */
+#loadingScreen{
+  position:fixed;
+  top:0;left:0;
+  width:100vw;height:100vh;
+  background:#000814;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  z-index:9999;
+  animation:fadeOut 1s ease forwards;
+  animation-delay:2.5s;
 }
 
-.game-grid img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+.loader{
+  width:70px;height:70px;
+  border:6px solid rgba(255,255,255,0.2);
+  border-top-color:#4da3ff;
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+  box-shadow:0 0 20px #4da3ff;
 }
 
-.game-grid img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fadeOut{to{opacity:0;visibility:hidden}}
+
+/* HEADER */
+.header{
+  position:fixed;
+  top:0;left:0;
+  width:100%;
+  height:60px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:32px;
+  font-weight:900;
+  letter-spacing:2px;
+
+  background:rgba(0,0,0,0.4);
+  border-bottom:1px solid rgba(255,255,255,0.15);
+
+  text-shadow:0 0 15px #4da3ff;
+  opacity:0;
+  animation:fadeIn 1.2s ease forwards;
 }
 
-.tips {
-  margin-top: 20px;
-  font-size: 16px;
-  font-style: italic;
-  color: #38bdf8;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
+/* LAYOUT */
+.container{
+  display:flex;
+  height:calc(100vh - 60px);
+  margin-top:60px;
 }
 
+/* SIDEBAR */
+.sidebar{
+  width:400px;
+  padding:20px;
+  background:rgba(0,0,0,0.45);
+  border-right:1px solid rgba(255,255,255,.15);
+  box-shadow:0 0 20px rgba(0,0,0,0.4);
+}
+
+.sidebar h3{
+  margin-bottom:15px;
+  font-size:20px;
+  font-weight:900;
+  text-shadow:0 0 10px #4da3ff;
+}
+
+.nav{
+  padding:12px;
+  margin-bottom:12px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,.15);
+  background:rgba(0,0,0,0.3);
+  cursor:pointer;
+  transition:.3s;
+  font-size:16px;
+  text-shadow:0 0 8px #4da3ff;
+}
+
+.nav:hover{
+  transform:translateX(6px) scale(1.05);
+  background:rgba(0,0,0,0.5);
+  box-shadow:0 0 15px #4da3ff;
+}
+
+/* MAIN CONTENT */
+.main{
+  flex:1;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  opacity:0;
+  transition:opacity .6s ease-in-out;
+}
+
+.main.visible{
+  opacity:1;
+}
+
+/* ABOUT BOX */
+.about-box{
+  max-width:1200px;
+  padding:60px;
+  border-radius:16px;
+  background:rgba(0,0,0,0.45);
+  border:1px solid rgba(255,255,255,.2);
+  box-shadow:0 0 30px rgba(77,163,255,.4);
+  text-align:center;
+  font-size:20px;
+  line-height:1.5;
+}
+
+.about-title{
+  font-size:28px;
+  font-weight:900;
+  margin-bottom:15px;
+  text-shadow:0 0 15px #4da3ff;
+}
+
+/* GAME GRID */
+.game-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+  gap:15px;
+  padding:20px;
+  width:90%;
+  max-width:1000px;
+}
+
+.game-grid img{
+  width:100%;
+  border-radius:10px;
+  transition:transform .3s, box-shadow .3s;
+}
+
+.game-grid img:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 20px rgba(255,255,255,0.6);
+}
 </style>
 </head>
+
 <body>
-<div class="lock-screen" id="lockScreen">
-  <div class="lock-box">
-    <div class="lock-title">Enter Password</div>
-    <div class="input-container">
-      <input id="passwordInput" type="password" placeholder="Enter code...">
-      <button id="passwordBtn">🔒</button>
-    </div>
-    <div id="passwordResult"></div>
-    <div id="passwordTips" class="tips"></div>
-  </div>
+
+<!-- LOADING SCREEN -->
+<div id="loadingScreen">
+  <div class="loader"></div>
 </div>
 
-<div class="header" id="header" style="display:none;">XAMAS PROXY V2.014</div>
+<!-- HEADER -->
+<div class="header" id="header" style="display:none;">
+  XAMAS PROXY V2.014
+</div>
+
+<!-- MAIN SITE -->
 <div class="container" id="site" style="display:none;">
+
   <div class="sidebar">
-    <h3>Menu</h3>
-    <div class="nav" onclick="home()">🎮Game</div>
-    <div class="nav" onclick="searchPage()">🔎Search Engine</div>
+    <h3>XAMAS PROXY V2.014</h3>
+
+    <div class="nav" onclick="home()">🎮 Game</div>
+    <div class="nav" onclick="searchPage()">🔎 Search Engine</div>
     <div class="nav" onclick="openAI()">🤖 AI</div>
-    <div class="nav">⚙️Settings (Soon)</div>
-    <div class="nav" onclick="about()">❓About</div>
+    <div class="nav">⚙️ Settings (Soon)</div>
+    <div class="nav" onclick="about()">❓ About</div>
   </div>
+
   <div class="main" id="main"></div>
 </div>
 
 <script>
-const lock = document.getElementById("lockScreen");
-const input = document.getElementById("passwordInput");
-const btn = document.getElementById("passwordBtn");
-const result = document.getElementById("passwordResult");
-const tipsContainer = document.getElementById("passwordTips");
+/* UNLOCK SYSTEM */
+setTimeout(()=>{
+  document.getElementById("header").style.display="flex";
+  document.getElementById("site").style.display="flex";
+  home();
+},2600);
 
-const tips = [
-  "♖♖Tucker get Off Chess♖♖",
-  "🎆Happy New Year Bois🎆",
-  "Obama Have Dihhh💔🥀",
-  "Your In The Epstien File bbg📁.",
-  "Indian Pajeet On Fire🔥"
-];
-
-let currentTipIndex = 0;
-
-btn.onclick = checkPassword;
-input.addEventListener("keydown", e => {if(e.key==="Enter") checkPassword();});
-
-function checkPassword(){
-  if(input.value.trim() === "XAMAKEYAUTH"){
-    result.style.color="#38bdf8";
-    result.textContent="Password Correct! Unlocking...";
-    setTimeout(()=>{
-      lock.style.display="none";
-      document.getElementById("header").style.display="flex";
-      document.getElementById("site").style.display="flex";
-      home();
-    },1000);
-  } else {
-    result.style.color="red";
-    result.textContent="🖕Skill Issue Or Your A Brokie Js Pay Already🖕";
-  }
-}
-
-function showTip(){
-  tipsContainer.textContent = tips[currentTipIndex];
-  tipsContainer.style.opacity = 2;
-
-  setTimeout(() => {
-    tipsContainer.style.opacity = 1;
-  }, 2000);
-
-  currentTipIndex = (currentTipIndex + 2) % tips.length;
-}
-
-setInterval(showTip, 5000); // Change tip every 5 seconds
-
+/* HOME PAGE */
 function home(){
-  const main = document.getElementById("main");
-  main.innerHTML = `
+  const main=document.getElementById("main");
+  main.innerHTML=`
     <div class="game-grid">
-      <img src="https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=314,height=314,fit=cover,f=auto/ec1d51ed9ca8ab3698524f7daba12744/drive-mad.png">
-      <img src="https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=204,height=204,fit=cover,f=auto/b87616bb88c0e3cb4c150c59fdc767fa/hill-climb-racing-lite.png">
-      <img src="https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=204,height=204,fit=cover,f=auto/5c613c3572ec23612e351745bc986579/blacktop-police-chase.png">
-      <img src="https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=204,height=204,fit=cover,f=auto/02018885c1521dd2830683a0ecc86440/watermelon-drop.png">
+      <img src="https://img.poki-cdn.com/cdn-cgi/image/q=78,width=314,height=314,fit=cover,f=auto/ec1d51ed9ca8ab3698524f7daba12744/drive-mad.png">
+      <img src="https://img.poki-cdn.com/cdn-cgi/image/q=78,width=204,height=204,fit=cover,f=auto/b87616bb88c0e3cb4c150c59fdc767fa/hill-climb-racing-lite.png">
+      <img src="https://img.poki-cdn.com/cdn-cgi/image/q=78,width=204,height=204,fit=cover,f=auto/5c613c3572ec23612e351745bc986579/blacktop-police-chase.png">
+      <img src="https://img.poki-cdn.com/cdn-cgi/image/q=78,width=204,height=204,fit=cover,f=auto/02018885c1521dd2830683a0ecc86440/watermelon-drop.png">
     </div>
   `;
-  document.getElementById("main").classList.add("visible");
+  main.classList.add("visible");
 }
 
+/* ABOUT PAGE */
 function about(){
-  const main = document.getElementById("main");
-  main.innerHTML = `
+  const main=document.getElementById("main");
+  main.innerHTML=`
     <div class="about-box">
       <div class="about-title">About Me</div>
       <p>Welcome! Thanks for looking here, Freaky Boy 👋</p>
       <p>By <strong>Tamim / Xama</strong></p>
       <p>Only for Educational Purpose & School Bypassing Protocols</p>
-      <p> W <strong>Bruh</strong> ❤️</p>
+      <p>W <strong>Bruh</strong> ❤️</p>
     </div>
   `;
-  document.getElementById("main").classList.add("visible");
+  main.classList.add("visible");
 }
 
-function searchPage() {
-  const main = document.getElementById("main");
-  main.innerHTML = `
-    <div class="about-box">
-      <div class="title">Search Engine</div>
-      <div class="input-container">
-        <input id="searchInput" type="text" placeholder="Search for anything...">
-        <button id="searchBtn">🔍</button>
-      </div>
-    </div>
+/* SEARCH ENGINE — AUTO LOAD IFRAME */
+function searchPage(){
+  const main=document.getElementById("main");
+  main.innerHTML=`
+    <iframe src="https://815moniquelane.cfd"
+      style="width:80%;height:90%;border:none;border-radius:20px;
+      box-shadow:0 0 25px rgba(77,163,255,0.6);"></iframe>
   `;
-  document.getElementById("main").classList.add("visible");
-
-  const inputS = document.getElementById("searchInput");
-  const btnS = document.getElementById("searchBtn");
-
-  function openIframe() {
-    const searchQuery = inputS.value.trim();
-    const iframe = document.createElement("iframe");
-    iframe.src = `https://815moniquelane.cfd`;
-    iframe.style.width = "50%";
-    iframe.style.height = "800px";
-    iframe.style.border = "none";
-    iframe.style.borderRadius = "20px";
-    iframe.style.boxShadow = "0 0 15px rgba(0, 0, 0, 0.3)";
-    
-    main.innerHTML = ""; // Clear previous content
-    main.appendChild(iframe);
-  }
-
-  btnS.onclick = openIframe;
-  inputS.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      openIframe();
-    }
-  });
+  main.classList.add("visible");
 }
 
-function openAI() {
-  const main = document.getElementById("main");
-  main.innerHTML = `
+/* AI PAGE */
+function openAI(){
+  const main=document.getElementById("main");
+  main.innerHTML=`
     <iframe src="https://815moniquelane.cfd/algebra.html"
-      style="width: 40%; height: 90%; border: none; border-radius: 20px; box-shadow: 0 0 20px rgba(0,0,0,0.5);"></iframe>
+      style="width:60%;height:90%;border:none;border-radius:20px;
+      box-shadow:0 0 25px rgba(77,163,255,0.6);"></iframe>
   `;
-  document.getElementById("main").classList.add("visible");
+  main.classList.add("visible");
 }
 </script>
+
 </body>
 </html>
-
 
 
