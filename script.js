@@ -21,7 +21,7 @@ const btn = document.getElementById("passwordBtn");
 const result = document.getElementById("passwordResult");
 const tipsBox = document.getElementById("passwordTips");
 
-const PASSWORD = "XAMAKEYAUTH";
+const PASSWORD = "1";
 
 const tips = [
   "♖♖Tucker get Off Chess♖♖",
