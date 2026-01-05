@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>XAMAS PROXY V2.014</title>
+<title>Grades</title>
 <link rel="icon" href="https://companieslogo.com/img/orig/PWSC-358b9060.png">
 
 <style>
@@ -188,7 +188,7 @@ body{
 </div>
 
 <script>
-const PASSWORD="1";
+const PASSWORDS = ["KEY=19192810932", "KEY=922389231", "KEY=1268869712", "KEY=9223678877", "KEY=2026"];
 const main=document.getElementById("main");
 const loader = document.getElementById("loader");
 const lock = document.getElementById("lock");
@@ -203,16 +203,17 @@ setTimeout(()=>{
   setTimeout(()=>input.focus(),100);
 },1500);
 
-/* PASSWORD CHECK */
 function check(){
-  if(input.value===PASSWORD){
+  if(PASSWORDS.includes(input.value)){
     lock.style.display="none";
     loader.style.display="flex";
+
     setTimeout(()=>{
       loader.style.display="none";
       site.style.display="block";
       home();
     },1200);
+
   } else {
     msg.textContent="Wrong password";
   }
@@ -275,5 +276,6 @@ input.addEventListener("keydown",e=>{if(e.key==="Enter")check()});
 
 </body>
 </html>
+
 
 
