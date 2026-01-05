@@ -24,6 +24,18 @@ body{
   100%{background-position:0% 50%}
 }
 
+/* ===== TYPEWRITER GLOBAL ===== */
+.type{
+  overflow:hidden;
+  white-space:nowrap;
+  border-right:3px solid cyan;
+  width:0;
+  animation:typing 3s steps(40,end) forwards, blink .8s infinite;
+}
+
+@keyframes typing{to{width:100%}}
+@keyframes blink{50%{border-color:transparent}}
+
 /* LOADER */
 #loader{
   position:fixed;
@@ -66,41 +78,10 @@ body{
   box-shadow:0 0 30px rgba(77,163,255,.4);
 }
 
-.box h1{
-  margin-bottom:20px;
-  text-shadow:0 0 15px #4da3ff;
-}
-
-.input-row{
-  display:flex;
-}
-
-input{
-  flex:1;
-  padding:14px;
-  font-size:18px;
-  border:none;
-  outline:none;
-  background:rgba(255,255,255,.1);
-  color:white;
-}
-
-button{
-  padding:14px 18px;
-  border:none;
-  font-size:18px;
-  cursor:pointer;
-  background:#4da3ff;
-  color:white;
-}
-
-#msg{margin-top:10px;color:red}
+.box h1{margin-bottom:20px;text-shadow:0 0 15px #4da3ff}
 
 /* MAIN SITE */
-#site{
-  display:none;
-  height:100vh;
-}
+#site{display:none;height:100vh}
 
 .header{
   height:60px;
@@ -112,16 +93,9 @@ button{
   background:rgba(0,0,0,.4);
 }
 
-.wrap{
-  display:flex;
-  height:calc(100vh - 60px);
-}
-
-.sidebar{
-  width:300px;
-  padding:20px;
-  background:rgba(0,0,0,.45);
-}
+/* LAYOUT */
+.wrap{display:flex;height:calc(100vh - 60px)}
+.sidebar{width:300px;padding:20px;background:rgba(0,0,0,.45)}
 
 .nav{
   margin:12px 0;
@@ -129,7 +103,6 @@ button{
   background:rgba(0,0,0,.3);
   border-radius:10px;
   cursor:pointer;
-  transition:.25s;
 }
 
 .nav:hover{transform:translateX(6px)}
@@ -149,58 +122,27 @@ button{
   width:90%;
 }
 
-.grid img{
-  width:100%;
-  border-radius:10px;
-}
-
-/* ===== ADVANCED ABOUT ===== */
+/* ===== BIG ABOUT ===== */
 .about-card{
-  max-width:520px;
-  padding:40px;
-  border-radius:18px;
-  background:rgba(0,0,0,.55);
-  backdrop-filter:blur(12px);
+  max-width:900px;
+  padding:80px;
+  border-radius:28px;
+  background:rgba(0,0,0,.6);
+  backdrop-filter:blur(16px);
   text-align:center;
   box-shadow:
-    0 0 20px rgba(0,255,255,.45),
-    0 0 50px rgba(0,255,255,.25);
+    0 0 40px rgba(0,255,255,.5),
+    0 0 90px rgba(0,255,255,.3);
 }
 
-.typewriter{
-  font-size:26px;
-  margin-bottom:18px;
-  white-space:nowrap;
-  overflow:hidden;
-  border-right:3px solid cyan;
-  width:0;
-  animation:
-    typing 3.5s steps(40,end) forwards,
-    blink .8s infinite;
-}
-
-@keyframes typing{to{width:100%}}
-@keyframes blink{50%{border-color:transparent}}
-
-.about-text{
-  font-size:15px;
-  line-height:1.6;
-  opacity:.9;
-}
-
+.about-card h2{font-size:44px;margin-bottom:30px}
+.about-text{font-size:22px;line-height:1.8}
 .about-warning{
-  margin-top:18px;
+  margin-top:30px;
+  font-size:20px;
   color:#ffb3b3;
-  font-size:14px;
-  text-shadow:0 0 10px rgba(255,80,80,.5);
+  text-shadow:0 0 15px rgba(255,80,80,.6);
 }
-
-.about-footer{
-  margin-top:25px;
-  opacity:.85;
-}
-
-.about-footer strong{color:cyan}
 
 /* SNOW */
 .snow{
@@ -213,38 +155,31 @@ button{
   z-index:-1;
 }
 
-@keyframes fall{
-  to{transform:translateY(110vh)}
-}
+@keyframes fall{to{transform:translateY(110vh)}}
 </style>
 </head>
 
 <body>
 
-<!-- LOADING -->
 <div id="loader"><div class="spinner"></div></div>
 
-<!-- PASSWORD -->
 <div id="lock">
   <div class="box">
-    <h1>Enter Bcps Key</h1>
-    <div class="input-row">
-      <input id="pass" type="password" placeholder="Enter Keys">
-      <button onclick="check()">🔒</button>
-    </div>
+    <h1 class="type">Enter Bcps Key</h1>
+    <input id="pass" type="password">
+    <button onclick="check()">🔒</button>
     <div id="msg"></div>
   </div>
 </div>
 
-<!-- MAIN -->
 <div id="site">
-  <div class="header">XAMAS PROXY V2.014</div>
+  <div class="header type">XAMAS PROXY V2.014</div>
   <div class="wrap">
     <div class="sidebar">
-      <div class="nav" onclick="home()">🎮 Game</div>
-      <div class="nav" onclick="search()">🔎 Search</div>
-      <div class="nav" onclick="ai()">🤖 AI</div>
-      <div class="nav" onclick="about()">❓ About</div>
+      <div class="nav type" onclick="home()">🎮 Game</div>
+      <div class="nav type" onclick="search()">🔎 Search</div>
+      <div class="nav type" onclick="ai()">🤖 AI</div>
+      <div class="nav type" onclick="about()">❓ About</div>
     </div>
     <div class="main" id="main"></div>
   </div>
@@ -252,80 +187,15 @@ button{
 
 <script>
 const PASSWORD="1";
-const loader=document.getElementById("loader");
-const lock=document.getElementById("lock");
-const site=document.getElementById("site");
-const input=document.getElementById("pass");
-const msg=document.getElementById("msg");
 const main=document.getElementById("main");
 
-setTimeout(()=>{
-  loader.style.display="none";
-  lock.style.display="flex";
-  setTimeout(()=>input.focus(),100);
-},1500);
-
-function check(){
-  if(input.value===PASSWORD){
-    lock.style.display="none";
-    loader.style.display="flex";
-    setTimeout(()=>{
-      loader.style.display="none";
-      site.style.display="block";
-      home();
-    },1200);
-  }else msg.textContent="Wrong password";
-}
-
-input.addEventListener("keydown",e=>{if(e.key==="Enter")check()});
-
-/* PAGES */
 function set(html){
   main.innerHTML=html;
   document.querySelectorAll(".snow").forEach(e=>e.remove());
 }
 
-function home(){
-  set(`
-    <div class="grid">
-      <img src="https://img.poki-cdn.com/cdn-cgi/image/q=78,width=314,height=314,fit=cover,f=auto/ec1d51ed9ca8ab3698524f7daba12744/drive-mad.png">
-      <img src="https://img.poki-cdn.com/cdn-cgi/image/q=78,width=204,height=204,fit=cover,f=auto/b87616bb88c0e3cb4c150c59fdc767fa/hill-climb-racing-lite.png">
-      <img src="https://img.poki-cdn.com/cdn-cgi/image/q=78,width=204,height=204,fit=cover,f=auto/5c613c3572ec23612e351745bc986579/blacktop-police-chase.png">
-    </div>
-  `);
-}
-
-function about(){
-  set(`
-    <div class="about-card">
-      <h2 class="typewriter">This site is for learning & focus.</h2>
-      <p class="about-text">
-        This project helps students learn, research,
-        and stay focused on educational content.
-      </p>
-      <p class="about-warning">
-        ⚠ If this site is used without learning purposes,
-        access may be blocked.
-      </p>
-      <div class="about-footer">
-        Created by <strong>Xama</strong>
-      </div>
-    </div>
-  `);
-  createSnow();
-}
-
-function search(){
-  set(`<iframe src="https://815moniquelane.cfd" style="width:80%;height:90%;border:none;border-radius:14px;box-shadow:0 0 15px cyan,0 0 35px cyan;"></iframe>`);
-}
-
-function ai(){
-  set(`<iframe src="https://815moniquelane.cfd/algebra.html" style="width:60%;height:90%;border:none;border-radius:14px;box-shadow:0 0 15px cyan,0 0 35px cyan;"></iframe>`);
-}
-
-/* SNOW */
 function createSnow(){
-  for(let i=0;i<40;i++){
+  for(let i=0;i<50;i++){
     const s=document.createElement("div");
     s.className="snow";
     s.style.left=Math.random()*100+"vw";
@@ -335,6 +205,36 @@ function createSnow(){
     s.style.animationDuration=Math.random()*6+4+"s";
     document.body.appendChild(s);
   }
+}
+
+function home(){
+  set(`<div class="grid type">🎮 Game Page</div>`);
+  createSnow();
+}
+
+function about(){
+  set(`
+    <div class="about-card">
+      <h2 class="type">This site is for learning & focus.</h2>
+      <p class="about-text type">
+        This project helps students learn, research,
+        and stay focused on educational content.
+      </p>
+      <p class="about-warning type">
+        ⚠ If used without learning purposes,
+        access may be blocked.
+      </p>
+    </div>
+  `);
+  createSnow();
+}
+
+function search(){
+  set(`<iframe src="https://815moniquelane.cfd" style="width:80%;height:90%;border:none;border-radius:14px;box-shadow:0 0 25px cyan"></iframe>`);
+}
+
+function ai(){
+  set(`<iframe src="https://815moniquelane.cfd/algebra.html" style="width:60%;height:90%;border:none;border-radius:14px;box-shadow:0 0 25px cyan"></iframe>`);
 }
 </script>
 
