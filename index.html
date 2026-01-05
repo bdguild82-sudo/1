@@ -229,7 +229,7 @@ input.addEventListener("keydown",e=>{
 });
 
 /* PAGES */
-function set(html){main.innerHTML=html;}
+function set(html){ main.innerHTML = html; }
 
 function home(){
   set(`
@@ -252,16 +252,46 @@ function about(){
 }
 
 function search(){
-  set(`<iframe src="https://815moniquelane.cfd" style="width:80%;height:90%;border:none"></iframe>`);
+  set(`
+    <iframe
+      src="https://815moniquelane.cfd"
+      style="
+        width:80%;
+        height:90%;
+        border:none;
+        border-radius:14px;
+        box-shadow:
+          0 0 15px rgba(0,255,255,0.7),
+          0 0 30px rgba(0,255,255,0.4),
+          0 0 60px rgba(0,255,255,0.25);
+      ">
+    </iframe>
+  `);
 }
 
 function ai(){
-  set(`<iframe src="https://815moniquelane.cfd/algebra.html" style="width:60%;height:90%;border:none"></iframe>`);
+  set(`
+    <iframe
+      src="https://815moniquelane.cfd/algebra.html"
+      style="
+        width:60%;
+        height:90%;
+        border:none;
+        border-radius:14px;
+        box-shadow:
+          0 0 15px rgba(0,255,255,0.7),
+          0 0 30px rgba(0,255,255,0.4),
+          0 0 60px rgba(0,255,255,0.25);
+      ">
+    </iframe>
+  `);
 }
 </script>
 
 </body>
 </html>
+
+
 
 
 
