@@ -4,235 +4,34 @@
 <meta charset="UTF-8">
 <title>Grades</title>
 <link rel="icon" href="https://companieslogo.com/img/orig/PWSC-358b9060.png">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{
-font-family:Arial,Helvetica,sans-serif;
-height:100vh;
-color:white;
-background:linear-gradient(135deg,#000814,#001d3d,#003566,#001d3d,#000814);
-background-size:300% 300%;
-animation:bg 12s ease infinite;
-overflow-x:hidden
-}
-@keyframes bg{
-0%{background-position:0% 50%}
-50%{background-position:100% 50%}
-100%{background-position:0% 50%}
-}
-.type{
-overflow:hidden;
-white-space:nowrap;
-border-right:3px solid cyan;
-width:0;
-animation:typing 3s steps(40,end) forwards,blink .8s infinite
-}
-@keyframes typing{to{width:100%}}
-@keyframes blink{50%{border-color:transparent}}
-#loader{
-position:fixed;
-inset:0;
-background:#000814;
-display:flex;
-justify-content:center;
-align-items:center;
-z-index:10
-}
-.spinner{
-width:70px;
-height:70px;
-border:6px solid rgba(255,255,255,.2);
-border-top-color:#4da3ff;
-border-radius:50%;
-animation:spin 1s linear infinite
-}
-@keyframes spin{to{transform:rotate(360deg)}}
-#lock{
-position:fixed;
-inset:0;
-display:none;
-justify-content:center;
-align-items:center;
-background:rgba(0,0,0,.65);
-z-index:20
-}
-.box{
-padding:40px;
-width:90%;
-max-width:600px;
-background:rgba(0,0,0,.55);
-border-radius:16px;
-text-align:center;
-box-shadow:0 0 30px rgba(77,163,255,.4)
-}
-.box h1{margin-bottom:20px;text-shadow:0 0 15px #4da3ff}
-#site{display:none;height:100vh}
-.header{
-height:60px;
-display:flex;
-justify-content:center;
-align-items:center;
-font-size:30px;
-font-weight:900;
-background:rgba(0,0,0,.4);
-animation:typing 3s steps(40,end) forwards,blink .8s infinite
-}
-.wrap{display:flex;height:calc(100vh - 60px)}
-.sidebar{width:300px;padding:20px;background:rgba(0,0,0,.45)}
-.nav{
-margin:12px 0;
-padding:12px;
-background:rgba(0,0,0,.3);
-border-radius:10px;
-cursor:pointer
-}
-.nav:hover{transform:translateX(6px)}
-.main{
-flex:1;
-display:flex;
-justify-content:center;
-align-items:center
-}
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
-gap:15px;
-width:90%
-}
-.about-card{
-max-width:900px;
-padding:80px;
-border-radius:28px;
-background:rgba(0,0,0,.6);
-backdrop-filter:blur(16px);
-text-align:center;
-box-shadow:0 0 40px rgba(0,255,255,.5),0 0 90px rgba(0,255,255,.3)
-}
-.about-card h2{font-size:44px;margin-bottom:30px;animation:typing 4s steps(60,end) forwards,blink .8s infinite}
-.about-text{font-size:22px;line-height:1.8;animation:typing 5s steps(100,end) forwards,blink .8s infinite}
-.about-warning{
-margin-top:30px;
-font-size:20px;
-color:#ffb3b3;
-text-shadow:0 0 15px rgba(255,80,80,.6);
-animation:typing 5s steps(120,end) forwards,blink .8s infinite
-}
-.snow{
-position:fixed;
-top:-10px;
-background:white;
-border-radius:50%;
-opacity:.8;
-animation:fall linear infinite;
-z-index:-1
-}
-@keyframes fall{to{transform:translateY(110vh)}}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
+
 <div id="loader"><div class="spinner"></div></div>
+
 <div id="lock">
-<div class="box">
-<h1 class="type">Enter Bcps Key</h1>
-<input id="pass" type="password">
-<button onclick="check()">🔒</button>
-<div id="msg"></div>
+  <div class="box">
+    <h1 class="type">Enter Bcps Key</h1>
+    <input id="pass" type="password">
+    <button onclick="check()">🔒</button>
+    <div id="msg"></div>
+  </div>
 </div>
-</div>
+
 <div id="site">
-<div class="header">XAMAS PROXY V2.014</div>
-<div class="wrap">
-<div class="sidebar">
-<div class="nav type" onclick="home()">🎮 Game</div>
-<div class="nav type" onclick="search()">🔎 Search</div>
-<div class="nav type" onclick="ai()">🤖 AI</div>
-<div class="nav type" onclick="about()">❓ About</div>
+  <div class="header">XAMAS PROXY V2.014</div>
+  <div class="wrap">
+    <div class="sidebar">
+      <div class="nav type" onclick="home()">🎮 Game</div>
+      <div class="nav type" onclick="search()">🔎 Search</div>
+      <div class="nav type" onclick="ai()">🤖 AI</div>
+      <div class="nav type" onclick="about()">❓ About</div>
+    </div>
+    <div class="main" id="main"></div>
+  </div>
 </div>
-<div class="main" id="main"></div>
-</div>
-</div>
-<script>
-const PASSWORDS=["KEY=19192810932","KEY=922389231","KEY=1268869712","KEY=9223678877","KEY=2026","KEY=SALAM120"]
-const main=document.getElementById("main")
-const loader=document.getElementById("loader")
-const lock=document.getElementById("lock")
-const site=document.getElementById("site")
-const input=document.getElementById("pass")
-const msg=document.getElementById("msg")
-setTimeout(()=>{
-loader.style.display="none"
-lock.style.display="flex"
-setTimeout(()=>input.focus(),100)
-},1500)
-<script>
-function check(){
-if(!PASSWORDS.includes(input.value)){
-msg.textContent="Wrong password"
-return
-}
 
-const win=window.open("about:blank","_blank")
-if(!win){
-msg.textContent="Allow popups"
-return
-}
-
-const page=`<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>XAMAS PROXY V2.014</title>
-<link rel="icon" href="https://companieslogo.com/img/orig/PWSC-358b9060.png">
-${document.querySelector("style").outerHTML}
-</head>
-<body>
-<div id="site" style="display:block;height:100vh">
-${site.innerHTML}
-</div>
-<script>
-const main=document.getElementById("main")
-function set(html){
-main.innerHTML=html
-document.querySelectorAll(".snow").forEach(e=>e.remove())
-}
-function createSnow(){
-for(let i=0;i<50;i++){
-const s=document.createElement("div")
-s.className="snow"
-s.style.left=Math.random()*100+"vw"
-const size=Math.random()*4+2
-s.style.width=size+"px"
-s.style.height=size+"px"
-s.style.animationDuration=Math.random()*6+4+"s"
-document.body.appendChild(s)
-}
-}
-function home(){
-set('<div class="grid type">🎮 Game Page</div>')
-createSnow()
-}
-function about(){
-set('<div class="about-card"><h2>This site is for learning & focus.</h2><p class="about-text">This project helps students learn, research, and stay focused on educational content.</p><p class="about-warning">⚠ If used without learning purposes, access may be blocked.</p></div>')
-createSnow()
-}
-function search(){
-set('<iframe src="https://815moniquelane.cfd" style="width:80%;height:90%;border:none;border-radius:14px;box-shadow:0 0 25px cyan"></iframe>')
-}
-function ai(){
-set('<iframe src="https://815moniquelane.cfd/algebra.html" style="width:60%;height:90%;border:none;border-radius:14px;box-shadow:0 0 25px cyan"></iframe>')
-}
-home()
-<\/script>
+<script src="script.js"></script>
 </body>
-</html>`
-
-win.document.open()
-win.document.write(page)
-win.document.close()
-
-setTimeout(()=>{
-window.open("","_self")
-window.close()
-},300)
-}
-</script>
+</html>
