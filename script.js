@@ -47,19 +47,28 @@ createSnow()
 }
 
 function about(){
-set(`<div class="about-card">
-<h2>This site is for learning & focus.</h2>
-<p class="about-text">
+set(`
+<div class="about-card">
+<h2 class="type">This site is for learning & focus.</h2>
+
+<p class="about-text type">
 This project helps students learn, research,
 and stay focused on educational content.
 </p>
-<p class="about-warning">
+
+<p class="about-warning type">
 ⚠ If used without learning purposes,
 access may be blocked.
 </p>
-</div>`)
+
+<p class="about-text type" style="margin-top:30px">
+Made by <b>Tamim / Xama</b>
+</p>
+</div>
+`)
 createSnow()
 }
+
 
 function search(){
 set(`<iframe src="https://815moniquelane.cfd" style="width:80%;height:90%;border:none;border-radius:14px;box-shadow:0 0 25px cyan"></iframe>`)
