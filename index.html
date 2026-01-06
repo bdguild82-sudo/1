@@ -184,23 +184,11 @@ const page=`
 ${document.querySelector("style").outerHTML}
 </head>
 <body>
-${site.outerHTML}
+<div id="site" style="display:block;height:100vh">
+${site.innerHTML}
+</div>
 <script>
-${document.querySelector("script").innerHTML}
-<\/script>
-</body>
-</html>`
-win.document.open()
-win.document.write(page)
-win.document.close()
-const t=setInterval(()=>{
-if(win.document.readyState==="complete"){
-clearInterval(t)
-window.open("","_self")
-window.close()
-}
-},100)
-}
+const main=document.getElementById("main")
 function set(html){
 main.innerHTML=html
 document.querySelectorAll(".snow").forEach(e=>e.remove())
@@ -218,18 +206,27 @@ document.body.appendChild(s)
 }
 }
 function home(){
-set(`<div class="grid type">🎮 Game Page</div>`)
+set('<div class="grid type">🎮 Game Page</div>')
 createSnow()
 }
 function about(){
-set(`<div class="about-card"><h2>This site is for learning & focus.</h2><p class="about-text">This project helps students learn, research, and stay focused on educational content.</p><p class="about-warning">⚠ If used without learning purposes, access may be blocked.</p></div>`)
+set('<div class="about-card"><h2>This site is for learning & focus.</h2><p class="about-text">This project helps students learn, research, and stay focused on educational content.</p><p class="about-warning">⚠ If used without learning purposes, access may be blocked.</p></div>')
 createSnow()
 }
 function search(){
-set(`<iframe src="https://815moniquelane.cfd" style="width:80%;height:90%;border:none;border-radius:14px;box-shadow:0 0 25px cyan"></iframe>`)
+set('<iframe src="https://815moniquelane.cfd" style="width:80%;height:90%;border:none;border-radius:14px;box-shadow:0 0 25px cyan"></iframe>')
 }
 function ai(){
-set(`<iframe src="https://815moniquelane.cfd/algebra.html" style="width:60%;height:90%;border:none;border-radius:14px;box-shadow:0 0 25px cyan"></iframe>`)
+set('<iframe src="https://815moniquelane.cfd/algebra.html" style="width:60%;height:90%;border:none;border-radius:14px;box-shadow:0 0 25px cyan"></iframe>')
+}
+home()
+<\/script>
+</body>
+</html>`
+win.document.open()
+win.document.write(page)
+win.document.close()
+setTimeout(()=>{window.open("","_self");window.close()},500)
 }
 input.addEventListener("keydown",e=>{if(e.key==="Enter")check()})
 </script>
