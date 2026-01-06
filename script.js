@@ -72,3 +72,35 @@ set(`<iframe src="https://815moniquelane.cfd/algebra.html" style="width:60%;heig
 input.addEventListener("keydown",e=>{
 if(e.key==="Enter")check()
 })
+let panicURL = localStorage.getItem("panicURL") || "https://classroom.google.com"
+let panicKey = localStorage.getItem("panicKey") || "Escape"
+
+function settings(){
+set(`
+<div class="settings-card">
+<h2>Panic Settings</h2>
+
+<label>Panic Website</label>
+<input id="panicURL" value="${panicURL}">
+
+<label>Panic Key</label>
+<input id="panicKey" value="${panicKey}">
+
+<button onclick="saveSettings()">Save</button>
+</div>
+`)
+}
+
+function saveSettings(){
+panicURL=document.getElementById("panicURL").value
+panicKey=document.getElementById("panicKey").value
+localStorage.setItem("panicURL",panicURL)
+localStorage.setItem("panicKey",panicKey)
+alert("Saved")
+}
+
+document.addEventListener("keydown",e=>{
+if(e.key===panicKey){
+window.location.replace(panicURL)
+}
+})
